@@ -72,6 +72,19 @@ VALUES
 ('Tyller', 'Figueredo', '2009-02-23', 'Rua Salvador, 436', 'tyller@email.com', '16997345263'),
 ('Juju', 'Limeira', '2008-06-24', 'Rua Piratas, 543', 'juju2008@gmail.com', '16993327473'),
 ('Frank', 'Ramos', '2009-07-28', 'Rua Vila Lobos, 1345', 'frank123@gmail.com', '16993725108');
+INSERT INTO Aluno (nome, sobrenome, data_nascimento, endereco, email, celular) 
+VALUES 
+('Lucas', 'Silva', '2004-02-15', 'Rua das Palmeiras, 120', 'lucas.silva@email.com', '(16) 98876-1122'),
+('Mariana', 'Oliveira', '2003-09-21', 'Avenida Brasil, 875', 'mariana.oliveira@email.com', '(16) 99745-3344'),
+('Pedro', 'Souza', '2005-06-10', 'Rua João Paulo II, 440', 'pedro.souza@email.com', '(16) 99213-5566'),
+('Ana', 'Carvalho', '2002-11-09', 'Rua das Acácias, 211', 'ana.carvalho@email.com', '(16) 99134-7788'),
+('Felipe', 'Costa', '2001-12-30', 'Rua São José, 98', 'felipe.costa@email.com', '(16) 99356-8899'),
+('Camila', 'Mendes', '2003-04-17', 'Rua Bela Vista, 502', 'camila.mendes@email.com', '(16) 99542-2211'),
+('Gustavo', 'Lima', '2004-08-05', 'Rua das Flores, 333', 'gustavo.lima@email.com', '(16) 99901-7733'),
+('Isabela', 'Fernandes', '2002-03-28', 'Rua Dom Pedro, 150', 'isabela.fernandes@email.com', '(16) 98890-1144'),
+('Thiago', 'Pereira', '2003-01-14', 'Avenida Paulista, 777', 'thiago.pereira@email.com', '(16) 98765-4422'),
+('Larissa', 'Ribeiro', '2005-05-25', 'Rua Rio Branco, 230', 'larissa.ribeiro@email.com', '(16) 99432-2233');
+
 
 
 -- LIVRO
@@ -97,6 +110,19 @@ VALUES
 ('O Nome do Vento', 'Patrick Rothfuss', 'Arqueiro', 2007, '978-8599296493', 7, 7, 130.00, 'Disponível'),
 ('Coraline', 'Neil Gaiman', 'Rocco', 2002, '978-8532512065', 6, 6, 75.00, 'Disponível'),
 ('O Diário de Anne Frank', 'Anne Frank', 'Record', 1947, '978-8501044453', 8, 8, 90.00, 'Disponível');
+
+INSERT INTO Livro (titulo, autor, editora, ano_publicacao, isbn, quant_total, quant_disponivel, valor_aquisicao, status_livro_emprestado) 
+VALUES 
+('A Culpa é das Estrelas', 'John Green', 'Intrínseca', '2012', '978-8580572261', 10, 10, 80.00, 'Disponível'),
+('Os Miseráveis', 'Victor Hugo', 'Martin Claret', '1862', '978-8572328406', 8, 8, 120.00, 'Disponível'),
+('O Código Da Vinci', 'Dan Brown', 'Arqueiro', '2003', '978-8575421135', 7, 7, 95.00, 'Disponível'),
+('A Menina que Roubava Livros', 'Markus Zusak', 'Intrínseca', '2005', '978-8535902772', 9, 9, 85.00, 'Disponível'),
+('Percy Jackson e o Ladrão de Raios', 'Rick Riordan', 'Intrínseca', '2005', '978-8598078355', 12, 12, 75.00, 'Disponível'),
+('O Alquimista', 'Paulo Coelho', 'Rocco', '1988', '978-8579800240', 10, 10, 60.00, 'Disponível'),
+('A Seleção', 'Kiera Cass', 'Seguinte', '2012', '978-8565765015', 6, 6, 70.00, 'Disponível'),
+('Harry Potter e a Pedra Filosofal', 'J.K. Rowling', 'Rocco', '1997', '978-8532511014', 15, 15, 100.00, 'Disponível'),
+('Cidades de Papel', 'John Green', 'Intrínseca', '2008', '978-8580573954', 9, 9, 80.00, 'Disponível'),
+('O Diário de Anne Frank', 'Anne Frank', 'Record', '1947', '978-8501044457', 5, 5, 90.00, 'Disponível');
 
 
 -- Inserindo Emprestimos
@@ -126,4 +152,18 @@ VALUES
 (20, 15, '2024-10-08', '2024-10-22', 'Em andamento'),
 (13, 18, '2024-10-09', '2024-10-23', 'Em andamento'),
 (19, 11, '2024-10-10', '2024-10-24', 'Em andamento');
+
+INSERT INTO Emprestimo (id_aluno, id_livro, data_emprestimo, data_devolucao, status_emprestimo) 
+VALUES 
+(1, 3, '2025-10-01', '2025-10-15', 'Concluído'),
+(2, 5, '2025-10-02', '2025-10-16', 'Concluído'),
+(3, 7, '2025-10-03', '2025-10-17', 'Em andamento'),
+(4, 1, '2025-10-04', '2025-10-18', 'Em andamento'),
+(5, 9, '2025-10-05', '2025-10-19', 'Concluído'),
+(6, 2, '2025-10-06', '2025-10-20', 'Em andamento'),
+(7, 10, '2025-10-07', '2025-10-21', 'Em andamento'),
+(8, 6, '2025-10-08', '2025-10-22', 'Concluído'),
+(9, 4, '2025-10-09', '2025-10-23', 'Em andamento'),
+(10, 8, '2025-10-10', '2025-10-24', 'Concluído');
+
 
