@@ -1,3 +1,4 @@
+import type { EmprestimoDTO } from "../interface/EmprestimoDTO.js";
 import { DatabaseModel } from "./DatabaseModel.js";
 
 const database = new DatabaseModel().pool;
@@ -71,9 +72,8 @@ class Emprestimo {
     this.id_emprestimo = id_emprestimo;
   }
 
-    static async listarEmprestimos(): Promise<Array<Emprestimo> | null> {
+  static async listarEmprestimos(): Promise<Array<Emprestimo> | null> {
     try {
-      
       let listaDeEmprestimos: Array<Emprestimo> = [];
 
       const querySelectEmprestimo = `SELECT * FROM emprestimo;`;
@@ -94,17 +94,54 @@ class Emprestimo {
         listaDeEmprestimos.push(novoEmprestimo);
       });
 
-  
       return listaDeEmprestimos;
     } catch (error) {
-     
       console.error(`Erro na consulta ao banco de dados. ${error}`);
-
-
       return null;
     }
   }
-  }
 
+  /**
+   * Cadastra um novo empréstimo no banco de dados.
+   * Espera um objeto EmprestimoDTO com os campos:
+   *  - id_aluno
+   *  - id_livro
+   *  - data_emprestimo
+   *  - data_evolucao
+   *  - status_emprestimo
+   */
+  static async cadastrarEmprestimo(emprestimo: EmprestimoDTO): Promise<boolean> {
+    try {
+      const queryInsertEmprestimo = `
+        INSERT INTO emprestimo
+          (id_aluno, id_livro, data_emprestimo, data_evolucao, status_emprestimo)
+        VALUES
+          ($1, $2, $3, $4, $5)
+        RETURNING id_emprestimo;
+      `;
+
+      const respostaBD = await database.query(queryInsertEmprestimo, [
+        emprestimo.id_aluno,
+        emprestimo.id_livro,
+        emprestimo.data_emprestimo,
+        emprestimo.data_devolucao,
+        emprestimo.status_emprestimo,
+      ]);
+
+      if (respostaBD.rows.length > 0) {
+        console.info(
+          `Empréstimo cadastrado com sucesso. ID: ${respostaBD.rows[0].id_emprestimo}`
+        );
+        return true;
+      }
+
+      return false;
+      
+    } catch (error) {
+      console.error(`Erro ao inserir empréstimo no banco de dados. ${error}`);
+      return false;
+    }
+  }
+}
 
 export default Emprestimo;

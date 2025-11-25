@@ -9,27 +9,23 @@ class Livro {
     private idLivro: number = 0;
     private editora: string;
     private anoPublicacao: string;
-    private principioAtivo: number;
     private isbn: string;
     private quantidadeTotal: number
     /**
      * Construtor da classe Livro
      * @param _editora Editora do livro
      * @param _anoPublicacao Ano de publicação
-     * @param _principioAtivo Código ou valor identificador
      * @param _isbn Código ISBN
      * @param _quantidadeTotal Quantidade total de exemplares
      */
     constructor(
         _editora: string,
         _anoPublicacao: string,
-        _principioAtivo: number,
         _isbn: string,
         _quantidadeTotal: number
     ) {
         this.editora = _editora;
         this.anoPublicacao = _anoPublicacao;
-        this.principioAtivo = _principioAtivo;
         this.isbn = _isbn;
         this.quantidadeTotal = _quantidadeTotal
     }
@@ -56,14 +52,7 @@ class Livro {
 
     public setAnoPublicacao(anoPublicacao: string): void {
         this.anoPublicacao = anoPublicacao;
-    }
-
-    public getPrincipioAtivo(): number {
-        return this.principioAtivo;
-    }
-
-    public setPrincipioAtivo(principioAtivo: number): void {
-        this.principioAtivo = principioAtivo;
+    
     }
 
     public getIsbn(): string {
@@ -92,7 +81,6 @@ class Livro {
                 const novoLivro: Livro = new Livro(
                     respostaBD.editora,
                     respostaBD.ano_publicacao,
-                    respostaBD.principio_ativo,
                     respostaBD.isbn,
                     respostaBD.quantidade_total
                 );
@@ -111,7 +99,7 @@ class Livro {
     static async cadastrarLivro(livro: LivroDTO): Promise<boolean> {
         try {
             const queryInsertLivro = `
-                INSERT INTO Livros (editora, ano_publicacao, isbn, quant_total, principio_ativo)
+                INSERT INTO Livros (editora, ano_publicacao, isbn, quant_total,)
                 VALUES ($1, $2, $3, $4, $5)
                 RETURNING id_livro;
             `;
@@ -121,7 +109,7 @@ class Livro {
                 livro.ano_publicacao,
                 livro.isbn,
                 livro.quant_total,
-                livro.principio_ativo
+                
             ]);
 
             if (respostaBD.rows.length > 0) {
@@ -146,7 +134,6 @@ class Livro {
                 const livro: Livro = new Livro(
                     livroBD.editora,
                     livroBD.ano_publicacao,
-                    livroBD.principio_ativo,
                     livroBD.isbn,
                     livroBD.quant_total
                 );

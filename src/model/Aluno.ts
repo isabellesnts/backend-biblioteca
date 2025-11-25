@@ -137,33 +137,37 @@ class Aluno {
 
   static async cadastrarAluno(Aluno: AlunoDTO): Promise<boolean> {
     try {
-      const queryInsertAluno = `INSERT INTO Alunos (nome, cpf, telefone)
-                                VALUES
-                                ($1, $2, $3)
-                                RETURNING id_Aluno;`;
+      const queryInsertAluno = `
+        INSERT INTO Alunos 
+          (nome, sobrenome, ra, data_nascimento, celular, email, endereco)
+        VALUES
+          ($1, $2, $3, $4, $5, $6, $7)
+        RETURNING id_Aluno;
+      `;
 
       const respostaBD = await database.query(queryInsertAluno, [
-        Aluno.sobrenome.toUpperCase(),
+        Aluno.nome,
+        Aluno.sobrenome,
         Aluno.ra,
-        Aluno.celular,
         Aluno.data_nascimento,
+        Aluno.celular,
         Aluno.email,
-        Aluno.endereco,
+        Aluno.endereco
       ]);
 
       if (respostaBD.rows.length > 0) {
-        console.info(
-          `Aluno cadastrado com sucesso. ID: ${respostaBD.rows[0].id_Aluno}`
-        );
+        console.info(`Aluno cadastrado com sucesso. ID: ${respostaBD.rows[0].id_Aluno}`);
 
         return true;
       }
 
-      return false;
+        return false;
+
     } catch (error) {
+
       console.error(`Erro na consulta ao banco de dados. ${error}`);
 
-      return false;
+        return false;
     }
   }
 
@@ -178,7 +182,7 @@ class Aluno {
           respostaBD.rows[0].nome,
           respostaBD.rows[0].sobrenome,
           respostaBD.rows[0].ra,
-          respostaBD.rows[0].dataNascimento,
+          respostaBD.rows[0].data_nascimento,
           respostaBD.rows[0].celular,
           respostaBD.rows[0].email,
           respostaBD.rows[0].endereco
@@ -187,9 +191,10 @@ class Aluno {
 
         return aluno;
       }
+        return null;
 
-      return null;
-    } catch (error) {
+      } catch (error) {
+
       console.error(`Erro ao buscar aluno no banco de dados. ${error}`);
       return null;
     }

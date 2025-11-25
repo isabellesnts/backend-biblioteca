@@ -4,5 +4,7 @@ export interface EmprestimoDTO {
     isbn_livro: string; // ISBN do livro emprestado
     data_emprestimo: Date;
     data_devolucao: Date;
+    id_aluno: number;
+    id_livro: number;
     status_emprestimo: string; // Ex: "Em andamento", "Devolvido", "Atrasado"
 }

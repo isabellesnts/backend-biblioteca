@@ -8,8 +8,5 @@ server.use(express.json());
 server.use(router);
 
 
-server.listen(3000, () => {
-  console.log("Servidor Ligado");
-});
 
 export { server };

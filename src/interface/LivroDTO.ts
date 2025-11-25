@@ -3,7 +3,6 @@ export interface LivroDTO {
     autor: string;
     editora: string;
     ano_publicacao: number;
-    principio_ativo: string;
     isbn: string;
     quant_total: number;
     quant_disponivel: number;
